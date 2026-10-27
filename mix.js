@@ -28,13 +28,17 @@
   const body=image(look,'body');
   ctx.save();if(poster){ctx.translate(20,20);ctx.scale(.9,.9);}
   // 全部单件在统一400×850坐标中绘制，每件独立，不替换其他类别。
-  const bw=body.naturalWidth*(810/body.naturalHeight);ctx.drawImage(body,200-bw/2,18,bw,810);
+  const footwear={red:[140,230],blue:[140,130],mary:[140,70],green:[140,140],sneakers:[140,82],orange:[140,80]}[look.shoes];
+  // 鞋子替换底图脚部；裁切仅作用于人物层，避免赤脚从鞋侧露出。
+  const bw=body.naturalWidth*(810/body.naturalHeight);
+  ctx.save();ctx.beginPath();ctx.rect(0,0,400,Math.min(790,831-footwear[1]+25));ctx.clip();
+  ctx.drawImage(body,200-bw/2,18,bw,810);ctx.restore();
   const draw=(part,x,y,w,h)=>{const img=image(look,part);if(img)ctx.drawImage(img,x,y,w,h);};
+  // 先穿鞋再穿下装，让裙摆自然遮住靴筒；预览、收藏和导出共用此顺序。
+  draw('shoes',200-footwear[0]/2,831-footwear[1],footwear[0],footwear[1]);
   const lower={navy:[290,225],pink:[310,310],green:[290,195],shorts:[216,138],lavender:[315,335],orange:[290,195]}[look.bottom];
   draw('bottom',200-lower[0]/2,365,lower[0],lower[1]);
   draw('top',87,168,226,216);
-  const footwear={red:[140,230],blue:[140,130],mary:[140,70],green:[140,140],sneakers:[140,82],orange:[140,80]}[look.shoes];
-  draw('shoes',200-footwear[0]/2,831-footwear[1],footwear[0],footwear[1]);
   if(look.accessory!=='none'){
    if(['redbow','pinkbow','lavender'].includes(look.accessory))draw('accessory',238,69,82,64);
    else if(look.accessory==='tiara')draw('accessory',156,103,88,33);
