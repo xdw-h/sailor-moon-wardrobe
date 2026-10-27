@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#fbf7f2">
+  <meta name="description" content="月光衣橱 · 美少女战士同人换装。五位少女，三十种造型，收藏属于你的月光时刻。">
+  <title>月光衣橱 · Moonlit Wardrobe</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='50' font-size='52'%3E☾%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="core.js"></script>
+  <script defer src="data.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header class="header">
+    <a class="brand" href="./" aria-label="月光衣橱首页"><span class="brand-mark">☾<i>✦</i></span><span>月光衣橱<small>MOONLIT WARDROBE</small></span></a>
+    <nav aria-label="主导航"><button class="nav-button selected" id="wardrobe-nav">换装室</button><button class="nav-button" id="collection-nav">我的收藏 <span id="saved-count">0</span></button><button class="nav-button" id="catalog-nav">服装图鉴 <span>↗</span></button></nav>
+    <span class="header-note">A LITTLE MAGIC, EVERY DAY</span>
+  </header>
+  <main>
+    <section class="intro"><div><p class="eyebrow">THE MOONLIGHT DRESSING ROOM</p><h1>今天，想成为哪一种<span>闪耀？</span></h1><p class="intro-text">挑选你的少女与衣装，留住一个心动的月光时刻。</p></div><div class="edition">VOL. 01 <span>美少女战士篇</span><small>5 位少女 · 30 套造型</small></div></section>
+    <div class="workspace">
+      <aside class="character-panel" aria-labelledby="character-heading"><h2 id="character-heading">选择少女 <span>01 — 05</span></h2><div id="characters" class="characters"></div><p class="rail-note">SHE IS<br>HER OWN<br><em>magic.</em></p></aside>
+      <section class="dressing-panel" aria-label="造型预览">
+        <div id="stage" class="stage" data-background="moon" aria-busy="true"><div class="stage-border"></div><span class="stage-corner">MOONLIGHT<br>ATELIER</span><span class="stage-number" id="stage-number">01 / 05</span><div class="celestial-ring"></div><div class="stage-stars" aria-hidden="true">✦<span>✧</span><i>✦</i></div><div class="pedestal"></div><img id="doll" alt="月野兔 · 经典战士" width="500" height="800" fetchpriority="high" draggable="false"><span id="loading" class="loading">正在打开月光衣橱…</span><button id="retry" class="retry" hidden>重新加载</button><div class="stage-label"><small id="stage-en">SAILOR MOON</small><h2 id="stage-name">月野兔</h2><p id="stage-look">经典战士</p></div><span class="stage-seal" aria-hidden="true">☾</span></div>
+        <div class="background-bar"><span>布景 <small>SCENE</small></span><div id="backgrounds" class="backgrounds" aria-label="选择布景"></div><span class="scene-caption" id="scene-caption">月光花园</span></div>
+        <div class="stage-actions"><button id="undo" class="button soft" aria-label="撤销上一步">↶ <span>撤销</span></button><button id="random" class="button soft">⤨ 随机灵感</button><button id="download" class="button soft">↓ 保存图片</button><button id="save" class="button primary">♡ 收藏造型</button></div>
+        <p class="preview-note">整套造型切换 · 同人重绘素材</p>
+      </section>
+      <section class="wardrobe-panel" aria-labelledby="wardrobe-heading"><div class="section-title"><div><p class="eyebrow">HER LITTLE WARDROBE</p><h2 id="wardrobe-heading">少女的衣橱</h2></div><span id="outfit-count">06 LOOKS</span></div><div id="filters" class="filters" aria-label="服装分类"></div><div id="outfits" class="outfits"></div><div class="wardrobe-note"><span>✧</span><p>每一套衣装，都藏着一段故事。<small>战士的勇气，和少女的日常。</small></p></div><button class="catalog-link" id="catalog-link"><span>打开完整服装图鉴 <small>114 条研究记录 · 持续收录中</small></span><b>↗</b></button></section>
+    </div>
+  </main>
+  <footer><span>☾ MOONLIT WARDROBE</span><p>《美少女战士》同人作品 · 非官方游戏 · 素材为 AI 重绘，细节可能与原作有差异</p><span>MADE WITH A LITTLE STARDUST ✧</span></footer>
+  <dialog id="collection-dialog" class="modal"><div class="modal-header"><div><p class="eyebrow">LITTLE MOMENTS TO KEEP</p><h2>我的月光收藏</h2></div><button class="close-button" data-close aria-label="关闭收藏">×</button></div><div id="collection-items" class="collection-items"></div><p class="modal-footnote">收藏仅保存在当前浏览器，最多保留 60 个造型。</p></dialog>
+  <dialog id="catalog-dialog" class="modal catalog-modal"><div class="modal-header"><div><p class="eyebrow">THE COSTUME ARCHIVE</p><h2>服装图鉴</h2></div><button class="close-button" data-close aria-label="关闭图鉴">×</button></div><p class="catalog-intro">原作服装的研究目录。30 套同人造型已制作，其余条目仍在整理；114 条记录不代表全系列服装总数。</p><div class="catalog-tools"><label class="search"><span>⌕</span><input id="catalog-search" type="search" placeholder="搜索角色、服装或版本" aria-label="搜索服装图鉴"></label><select id="catalog-status" aria-label="筛选制作状态"><option value="all">全部研究记录</option><option value="ready">可试穿</option><option value="pending">待制作</option></select></div><p id="catalog-summary" class="catalog-summary" aria-live="polite"></p><div id="catalog-items" class="catalog-items"></div></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div><div id="error-message" class="error-message" role="alert" hidden></div>
+</body>
+</html>
